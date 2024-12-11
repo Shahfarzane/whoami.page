@@ -1,0 +1,210 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Extensions {
+  id String @id @default(cuid())
+
+  @@map("extensions")
+}
+
+model User {
+  id                 String           @id @default(cuid())
+  onboardingComplete Boolean          @default(false)
+  fullName           String?
+  firstName          String?
+  lastName           String?
+  username           String           @unique
+  email              String           @unique
+  verified           Boolean?         @default(false)
+  emailVerified      Boolean?
+  profileImage       String?          @db.VarChar(255)
+  website            String?
+  description        String?
+  pronouns           String?
+  location           String?
+  jobTitle           String?
+  createdAt          DateTime         @default(now()) @map("created_at")
+  updatedAt          DateTime         @updatedAt @map("updated_at")
+  contactMethods     ContactMethod[]  @relation("UserContactMethods")
+  following          Follow[]         @relation("Following")
+  followers          Follow[]         @relation("Followers")
+  likedPosts         Like[]
+  posts              Post[]
+  reposts            Repost[]
+  bookmarks          Bookmark[]
+  experiences        UserExperience[]
+  projects           Projects[]
+
+  @@index([email])
+  @@index([username])
+}
+
+model ContactMethod {
+  id              String         @id @default(cuid())
+  type            ContactUrlType
+  contactUsername String
+  userId          String
+  user            User           @relation("UserContactMethods", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Projects {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  url         String?  @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String?
+  startYear   String
+  client      String?
+  authorId    String
+  images      String[]
+  startMonth  Month
+  user        User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
+  @@index([authorId, createdAt])
+  @@index([title])
+  @@map("projects")
+}
+
+model UserExperience {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  company     String
+  url         String?  @db.VarChar(255)
+  startYear   String
+  endYear     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String
+  images      String[]
+  startMonth  Month
+  endMonth    Month?
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
+  @@index([authorId, createdAt])
+  @@index([title])
+  @@index([company])
+  @@map("experiences")
+}
+
+model Post {
+  id           String       @id @default(cuid())
+  text         String
+  images       String[]
+  authorId     String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  parentId     String?
+  quoteId      String?
+  replyPrivacy ReplyPrivacy @default(PUBLIC)
+  likes        Like[]
+  author       User         @relation(fields: [authorId], references: [id])
+  parent       Post?        @relation("Replies", fields: [parentId], references: [id])
+  replies      Post[]       @relation("Replies")
+  quote        Post?        @relation("Quotes", fields: [quoteId], references: [id])
+  quotedBy     Post[]       @relation("Quotes")
+  reposts      Repost[]
+  bookmarks    Bookmark[]
+
+  @@index([authorId, createdAt])
+  @@index([parentId])
+  @@index([text])
+}
+
+model Like {
+  createdAt DateTime @default(now())
+  postId    String
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([postId, userId])
+  @@unique([postId, userId])
+  @@index([userId])
+  @@index([userId, createdAt])
+}
+
+model Repost {
+  createdAt DateTime @default(now())
+  postId    String
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([postId, userId])
+  @@index([userId])
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, postId])
+  @@unique([postId, userId])
+  @@index([userId])
+  @@index([postId])
+  @@index([userId, createdAt])
+  @@map("bookmarks")
+}
+
+model Follow {
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+  id          String   @id @default(cuid())
+  follower    User     @relation("Following", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("Followers", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
+  @@index([followerId, createdAt])
+  @@index([followingId, createdAt])
+}
+
+enum ContactUrlType {
+  TWITTER
+  LINKEDIN
+  GITHUB
+  FIGMA
+  EMAIL
+  PHONE
+}
+
+enum ReplyPrivacy {
+  PUBLIC
+  FOLLOWERS_ONLY
+}
+
+enum Month {
+  JANUARY
+  FEBRUARY
+  MARCH
+  APRIL
+  MAY
+  JUNE
+  JULY
+  AUGUST
+  SEPTEMBER
+  OCTOBER
+  NOVEMBER
+  DECEMBER
+}

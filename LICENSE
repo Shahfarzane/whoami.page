@@ -1,0 +1,44 @@
+                    GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
+
+ Copyright (C) 2024 @shahfarzane
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+                     Additional Terms under Section 7
+
+As per Section 7 of the GNU Affero General Public License version 3, the following additional terms are applicable to this software:
+
+1. Commercial Use Restriction:
+   Any use of this software for commercial purposes, including but not limited to:
+   a) Selling the software or derivatives of it
+   b) Using the software in a commercial product or service
+   c) Using the software in a business environment
+   requires explicit written permission from the copyright holder (@shahfarzane).
+
+2. Attribution Requirement:
+   All copies or substantial portions of the software must include:
+   a) A visible and accessible link to the original repository
+   b) The original copyright notice
+   c) This license and additional terms
+
+3. Network Use Notification:
+   If you modify the software and make it accessible over a network, you must:
+   a) Make your modified source code publicly available
+   b) Include prominent notice of your modifications
+   c) Provide users with access to the source code
+
+These terms supplement the GNU Affero General Public License. If there is any conflict between these terms and the AGPL, these terms shall take precedence.
+
+For licensing inquiries or commercial use permission, please contact: [Your Contact Information]

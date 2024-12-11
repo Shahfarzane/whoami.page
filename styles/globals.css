@@ -1,0 +1,231 @@
+@import 'tailwindcss/base';
+@import '@radix-ui/themes/styles.css';
+
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --blue: 201.4 99.4% 66.8%;
+
+    --background: 0deg 0% 11%;
+    --background-surface-100: 0deg 0% 12.2%;
+    --background-surface-75: 0deg 0% 9%;
+    --background-alternative-default: 0deg 0% 5.9%;
+    --background-muted: 0deg 0% 14.1%;
+    --foreground: 0deg 0% 98%;
+    --foreground-lighter: 0deg 0% 53.7%;
+    --border: 0deg 0% 18%;
+    --background-selection: 0deg 0% 19.2%;
+    --border-stronger: 0deg 0% 27.1%;
+    --border-strong: 0deg 0% 21.2%;
+    --border-muted: 0deg 0% 14.1%;
+    --border-alternative: 0deg 0% 26.7%;
+    --gray-dark-700: 0deg 0% 24.3%;
+    --gray-dark-800: 0deg 0% 31.4%;
+    --gray-light-400: 0deg 0% 92.9%;
+    --gray-light-500: 0deg 0% 91%;
+    --brand: 0 100% 69%;
+    --gray-1: 0 0% 5.098%;
+    --gray-2: 0 0% 9.4118%;
+    --gray-3: 0 0% 13.333%;
+    --gray-4: 0 0% 16.078%;
+    --gray-5: 0 0% 19.216%;
+    --gray-6: 0 0% 22.745%;
+    --gray-7: 0 0% 28.235%;
+    --gray-8: 0 0% 37.647%;
+    --gray-9: 0 0% 43.137%;
+    --gray-10: 0 0% 48.235%;
+    --gray-11: 0 0% 70.588%;
+    --gray-12: 0 0% 93.333%;
+    --gray-a1: hsla(0, 0%, 0%, 0);
+    --gray-a2: hsla(0, 0%, 100%, 0.0353);
+    --gray-a3: hsla(0, 0%, 100%, 0.0706);
+    --gray-a4: hsla(0, 0%, 100%, 0.1059);
+    --gray-a5: hsla(0, 0%, 100%, 0.1333);
+    --gray-a6: hsla(0, 0%, 100%, 0.1725);
+    --gray-a7: hsla(0, 0%, 100%, 0.2314);
+    --gray-a8: hsla(0, 0%, 100%, 0.3333);
+    --gray-a9: hsla(0, 0%, 100%, 0.3922);
+    --gray-a10: hsla(0, 0%, 100%, 0.4471);
+    --gray-a11: hsla(0, 0%, 100%, 0.6863);
+    --gray-a12: hsla(0, 0%, 100%, 0.9294);
+    --panel: 0 0% 9.4118%;
+    --panel-background: hsla(0, 0%, 10%, 1);
+    --panel-border: 1px solid hsla(0, 0%, 100%, 0.2);
+    --panel-text-color: hsla(0, 0%, 100%, 0.4);
+    --panel-dropdown-border: hsla(0, 0%, 100%, 0.1);
+    --panel-padding-selected: hsla(0, 0%, 100%, 1);
+    --background-selection: 0deg 0% 19.2%;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background;
+    @apply font-sans;
+    text-rendering: optimizeLegibility;
+
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-overflow-ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@layer components {
+  .zoom-image [data-rmiz-modal-overlay='visible'] {
+    @apply bg-[#101010]/90 backdrop-blur-xl;
+  }
+
+  .zoom-image [data-rmiz-modal-img] {
+    @apply lg: rounded-2xl;
+  }
+
+  [cmdk-root] {
+    max-width: 640px;
+    width: 100%;
+    padding: 8px;
+    background: var(--gray2);
+    border-radius: 16px;
+    overflow: hidden;
+    font-family: var(--font-sans);
+    border: 1px solid var(--gray6);
+    box-shadow: var(--cmdk-shadow);
+    outline: none;
+  }
+
+  [cmdk-header] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 48px;
+    padding: 0 8px;
+    border-bottom: 1px solid var(--gray5);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  [cmdk-header] svg {
+    width: 20px;
+    height: 20px;
+    color: var(--gray-9);
+    transform: translateY(1px);
+  }
+
+  [cmdk-input] {
+    font-family: var(--font-sans);
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+    background: var(--bg);
+    color: var(--gray12);
+  }
+
+  [cmdk-input]::placeholder {
+    color: var(--gray9);
+  }
+
+  [cmdk-item] {
+    content-visibility: auto;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gray12);
+    padding: 8px 8px;
+
+    transition: all 150ms ease;
+    transition-property: none;
+  }
+
+  [cmdk-item][data-selected='true'] {
+    background: var(--gray4);
+    color: var(--gray12);
+  }
+
+  [cmdk-item][data-disabled='true'] {
+    color: var(--gray8);
+    cursor: not-allowed;
+  }
+
+  [cmdk-item] svg {
+    width: 16px;
+    height: 16px;
+    color: #ffffff;
+  }
+
+  [cmdk-meta] {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  [cmdk-item-subtitle] {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--gray-11);
+  }
+
+  [cmdk-items] {
+    min-height: 308px;
+    display: flex;
+  }
+
+  [cmdk-list] {
+    overflow: auto;
+  }
+
+  [cmdk-group-heading] {
+    user-select: none;
+    font-size: 12px;
+    color: var(--gray11);
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    margin: 8px 4px 0;
+  }
+
+  [cmdk-empty] {
+    font-size: 14px;
+    padding: 32px;
+    white-space: pre-wrap;
+    color: var(--gray11);
+  }
+
+  @media (max-width: 640px) {
+    [cmdk-framer-item-subtitle] {
+      display: none;
+    }
+  }
+}
