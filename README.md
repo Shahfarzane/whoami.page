@@ -29,8 +29,6 @@ A modern, open-source platform for creating and sharing professional profiles. B
 
 - Node.js 18+
 - PostgreSQL database (Recommended: Neon.tech)
-- 1GB RAM minimum
-- 2GB storage space
 - Clerk account for authentication
 - Uploadthing account for file uploads
 
