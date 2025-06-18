@@ -4,6 +4,7 @@ A modern, open-source platform for creating and sharing professional profiles. B
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](https://github.com/shahfarzane/whoami.page/blob/main/LICENSE)
 [![Commercial License](https://img.shields.io/badge/License-Commercial-red.svg)](https://github.com/shahfarzane/whoami.page/blob/main/COMMERCIAL_LICENSE.md)
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/shahfarzane/%2Fwhoami.page)
 
 ## 🌟 Features
 
